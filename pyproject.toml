@@ -1,0 +1,26 @@
+[project]
+name = "reverse-thinking-agent"
+version = "0.1.0"
+description = "Reverse-thinking agents built on top of TempoBench."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+reverse-thinking = "reverse_thinking_agent.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"

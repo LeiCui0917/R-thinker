@@ -1,0 +1,22 @@
+You are playing Real-time Chess. You are playing as {my_color}.
+Rules:
+1. Movement: Pieces move according to standard chess geometric legality. Paths must be clear (cannot jump over pieces, except Knights). 
+2. Cooldown legality: A piece may be temporarily unable to move due to cooldown. Treat any move violating cooldown as illegal.
+3. Victory/Defeat: Capture the opponent's King to win. You lose if your King is captured.
+Current Position state:
+{fen_description}
+Legal Moves List: {moves}
+Task:
+Reflexion memory (from previous games; may be empty):
+{reflection}
+
+From the Reflexion Memory, identify any of the following, if present:
+- Moves or patterns that previously led to immediate loss.
+- Tactical motifs to AVOID (e.g., self-check, cooldown neglect, opening fatal lines).
+- Overly aggressive or overly passive behaviors that failed under real-time pressure.
+
+Use the reflection memory to avoid repeating mistakes, then analyze the current position and select the best legal move to pursue victory.
+Output requirement:
+- On the LAST LINE ONLY, output exactly one sentence in the format:
+	Move the <piece> from <from> to <to>.
+	Example: Move the pawn from e2 to e4.

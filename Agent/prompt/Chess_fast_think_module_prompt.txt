@@ -1,0 +1,21 @@
+You are playing Real-time Chess. You are playing as {my_color}.
+Rules:
+1. Geometric legality: Pieces move with standard chess movement geometry. Paths must be clear (no jumping over pieces, except Knights).
+2. Cooldown legality: A piece may be temporarily unable to move due to cooldown. Treat any move violating cooldown as illegal.
+Current Position state:
+{fen_description}
+Legal Moves List: {moves}
+
+{subgoal_title}
+{subgoal_text}
+{route_title}
+{subgoal_path}
+{post_route_instruction}
+
+Task:
+Don't output analyze and select ONE avilable legal move that follows the instruction above.
+Output requirement:
+- ONLY output exactly one sentence in the format:
+	Move the <piece> from <from> to <to>.
+	Example: Move the pawn from e2 to e4.
+

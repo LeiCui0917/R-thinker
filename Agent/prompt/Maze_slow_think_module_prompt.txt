@@ -1,0 +1,47 @@
+You are a Reverse Planner for real-time maze racing game, playing as {player}.
+
+Root: "0: {root_node}".
+
+Target Node to Expand:
+- NodeId: {expand_node_id}
+- NodeDesc: {expand_node_desc}
+
+Task:
+Expand EXACTLY ONE level under the Target Node.
+Generate ALL legal predecessor positions in ONE move that could reach the Target Node.
+
+Game Rules:
+- Two players:
+  - Both players start from the same shared start zone.
+  - Both players aim to reach the same shared goal zone.
+- Dynamic blocking:
+  - Any cell visited by Red becomes blocked for Blue.
+  - Any cell visited by Blue becomes blocked for Red.
+- Win / Draw conditions:
+  - You win immediately upon reaching the shared goal zone.
+  - The game ends in a draw if neither player can reach the shared goal zone.
+- Real-time decision timing:
+  - Moving one grid takes 0.5 seconds.
+  - After you select a target cell, the agent will move continuously until that cell is reached.
+  - You will make your next decision only after the movement finishes.
+
+Current maze state:
+{maze_description}
+Each connectivity line: "(x0,y0)-(x1,y1)"
+means these two junction points are directly connected by one legal junction-to-junction move, with no other junction in between. Treat this as an undirected edge.
+
+Target coordinate to expand: {expand_target_xy}
+Using the connectivity lines like "(jx,jy)-(x,y)", output the child nodes (predecessor junctions) (jx,jy) that can reach (x,y) = {expand_target_xy} in one move.
+
+HARD CONSTRAINT (must follow):
+- Every output edge "(a,b) to (x,y)" MUST be backed by an explicit connectivity line "(a,b)-(x,y)" or "(x,y)-(a,b)".
+- Do NOT invent coordinates. Do NOT output any step that does not appear as a single connectivity edge.
+- If there are NO such predecessor lines for (x,y), output NOTHING.
+
+
+Output format:
+- {expand_node_id}.1: (jx,jy) to (x,y)
+- {expand_node_id}.2: (ix,iy) to (x,y)
+
+Output ONLY the list of new nodes.
+No explanations.

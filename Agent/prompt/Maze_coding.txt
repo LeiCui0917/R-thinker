@@ -1,0 +1,49 @@
+You are a "State-action generator" for an execution module as {player} in Real-time Maze racing game. 
+
+Game Rules:
+- Two players: Red Red targets Goal A; Blue Red targets Goal B.
+- Blocking:
+  - Any cell visited by one player is blocked for the other.
+- Termination:
+  - Reaching your own goal ends the game with an immediate win.
+  - If neither player can reach their goal, the game ends in a draw.
+- Real-time execution:
+  - Moving one grid takes 0.5 seconds.
+  - After selecting a target cell, the agent moves continuously until it is reached.
+  - The next decision is made only after the movement finishes.
+
+Current maze state:
+{maze_description}
+Each line: "(x0,y0) to D -> (x1,y1)[k]"
+means moving from (x0,y0) along direction D reaches (x1,y1) in k steps, which also means (x1,y1) can reach (x0,y0)，(x0,y0) on the left is always a junction point, but (x1,y1) may be either a junction OR a dead-end cell.
+
+Using the Junction Graph lines like "(x0,y0) to D -> (x1,y1)[k]", output the next junction (x1,y1) that (x0,y0) can reach in ONE move.
+
+   IntentPath: (x0,y0) -> (x1,y1) -> (x2,y2) -> (x3,y3) -> (x4,y4)
+   - (x0,y0) must be the current position.
+   - (x1,y1) must be a reachable next junction.
+   - (x2,y2) must be the next junction after (x1,y1).
+   make sure these are junction, and these are different position.
+
+- Anti-loop (do NOT repeat paths):
+  -  Do NOT select (x1,y1) if it equals any of your last 2 junctions, unless no other legal move exists.
+
+Legal Moves List: {moves}
+
+Given the CURRENT position, generate at least 10 executable state–action pairs.
+
+- A state is represented by the your current position
+- States include:
+  - the current state
+  - predicted future states reachable within the next few moves from the current state.
+- Example:
+  State: {player} at (x0,y0)
+  Action: (x0,y0) -> (x1,y1)
+- At least ONE pair MUST use the exact CURRENT state, and its Action.
+- Actions associated with the current state MUST be chosen from the legal move set.
+- Actions associated with the future states should be executable.
+
+Output requirement:
+- Only output exactly state action pairs in the format:
+  State: {player} at (x0,y0)
+  Action: (x0,y0) -> (x1,y1)

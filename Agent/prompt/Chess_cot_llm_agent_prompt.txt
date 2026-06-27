@@ -1,0 +1,29 @@
+You are playing Real-time Chess. You are playing as {my_color}.
+Rules:
+1. Movement: Pieces move according to standard chess geometric legality. Paths must be clear (cannot jump over pieces, except Knights). 
+2. Cooldown legality: A piece may be temporarily unable to move due to cooldown. Treat any move violating cooldown as illegal.
+3. Victory/Defeat: Capture the opponent's King to win. You lose if your King is captured.
+Current Position state:
+{fen_description}
+Legal Moves List: {moves}
+
+Task:
+Step 1 — Candidate Set:
+Select 3–5 candidate moves.
+
+Step 2 — Rapid Elimination:
+For EACH candidate, check in order:
+(a) Does it immediately expose your King to capture? If yes → ELIMINATE.
+(b) Does it create or maintain a direct geometric threat on the opponent King (e.g., check, line-opening, reduced escape squares)?
+(c) Does it improve your next-move attack potential (piece activity, alignment)?
+Do NOT assume any opponent move or future cooldown changes.
+Evaluate ONLY the immediate state after your move.
+
+Step 3 — Selection:
+Choose the strongest remaining candidate.
+
+
+Output requirement:
+- On the LAST LINE ONLY, output exactly one sentence in the format:
+	Move the <piece> from <from> to <to>.
+	Example: Move the pawn from e2 to e4.

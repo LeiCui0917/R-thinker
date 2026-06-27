@@ -1,0 +1,37 @@
+You are playing Real-time Maze racing game. You are playing as {player}.
+Game Rules:
+- Two players start from the same shared start zone and both race toward the same shared goal zone.
+- Blocking:
+  - Any cell visited by one player is blocked for the other.
+- Termination:
+  - Reaching the shared goal zone ends the game with an immediate win.
+  - If neither player can reach the shared goal zone, the game ends in a draw.
+- Real-time execution:
+  - Moving one grid takes 0.5 seconds.
+  - After selecting a target cell, the agent moves continuously until it is reached.
+  - The next decision is made only after the movement finishes.
+
+Current maze state:
+{maze_description}
+Each connectivity line: "nodeA-nodeB"
+where each node is "(x,y)" coordinate.
+These two nodes are directly connected by one legal junction-to-junction move. Treat this as an undirected edge.
+
+Using the connectivity lines, output the next junction (x1,y1) that the current node can reach in ONE move.
+
+  IntentPath: n0 -> (x1,y1) -> (x2,y2)
+  - n0 must be the current position node (x0,y0).
+   - (x1,y1) must be a reachable next junction.
+   - (x2,y2) must be the next junction after (x1,y1).
+   make sure these are junction, and these are different position.
+
+- Anti-loop (do NOT repeat paths):
+  -  Do NOT select (x1,y1) if it equals any of your last 2 junctions, unless no other legal move exists.
+
+Legal Moves List: {moves}
+Task:
+Quckily Analyze the current position and select the best legal moves to pursue victory. 
+Output requirement:
+- On the LAST LINE ONLY, output Legal Moves in the format:
+  IntentPath: n0 -> (x1,y1) -> (x2,y2)
+

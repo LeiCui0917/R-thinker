@@ -1,0 +1,61 @@
+You are a Reverse Geometric Planner for real-time Chess, playing as {my_color}.
+
+Target Node to Expand:
+- NodeId: {expand_node_id}
+- NodeDesc: {expand_node_desc}
+
+Task:
+- You are maintaining a reverse reasoning tree starting from the opponent’s King is captured. 
+- Expand EXACTLY ONE reverse level under the Target Node that needs to be further expanded.
+- Generate All geometrically legal predecessor semantic states of ALL {my_color} <Piece> in ONE move that could reach the target node's relative configuration.
+- A semantic state is ONLY the relative position between a {my_color} piece and the {opponent_color} King.
+
+Reverse expansion rule:
+- If the target node is:
+  {opponent_color} King is captured by a {my_color} <Piece> at (x,n)
+- Then a valid predecessor is:
+  {my_color} <Piece> at (x + Δx1, n + Δn1) relative to {opponent_color} King at (x,n)
+- If the target node is:
+  {my_color} <Piece> at (x + Δx1, n + Δn1) relative to {opponent_color} King at (x,n)
+- Then a valid predecessor is:
+  {my_color} <Piece> at (x + Δx1 + Δx2, n + Δn1 + Δn2) relative to the SAME {opponent_color} King
+- Here, (Δx2, Δn2) is EXACTLY ONE legal geometric move of that piece.
+- Numeric move offsets (e.g., +1, +2) MUST be appended symbolically (e.g., x+1+2, NOT x+3)
+
+Movement rules:
+
+Sliding pieces (Queen, Rook, Bishop):
+- Rook: Δx = 0 OR Δn = 0
+- Bishop: |Δx| = |Δn|
+- Queen: Rook OR Bishop rules
+- Path must be CLEAR.
+- Δx and Δn are SYMBOLIC offsets. Do NOT replace them with numbers.
+- Use symbolic Δx Δn 0 represent the relative position
+
+Fixed-step pieces:
+- King: (-1,0),(1,0),(0,-1),(0,1)
+- Knight: (1,2),(2,1),(-1,2),(-2,1),(1,-2),(2,-1),(-1,-2),(-2,-1)
+- Pawn:
+  - Attack only: (±1,+1)
+  - Forward move allowed: (0,+1)
+- Use concrete numeric values represent the relative position
+
+Node content:
+- Each node MUST include:
+  1. Color and piece type
+  2. Relative position (Δx, Δn) to the target
+  3. Path status:
+     - "with no obstruction"
+     - OR "needs clearing" 
+     - OR "does not affect the move" 
+
+{opponent_color} King at (x,n)
+Output rules:
+- Output ONLY the predecessor nodes.
+- Don't output explanations or analysis. 
+- Do NOT add any extra words, bullets, markdown, headings, or parenthetical constraints.
+- Format:
+Example:
+{expand_node_id}.1: {my_color} <Piece> at (x+ , n+ ), Path with no obstruction
+{expand_node_id}.2: {my_color} <Piece> at (x+ , n+ ), Path needs clearing
+{expand_node_id}.3: {my_color} <Piece> at (x+ , n+ ), Path does not affect the move

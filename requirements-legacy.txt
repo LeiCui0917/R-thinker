@@ -1,0 +1,30 @@
+# Basic Dependencies
+python-chess
+requests
+gymnasium
+gym-maze
+zstandard
+
+# Plotting (for Experiments/tools/plot_rule_delay_results.py)
+matplotlib
+
+# Local semantic similarity (fast subgoal matching)
+sentence-transformers
+
+# Web Framework Dependencies (Critical Fix)
+flask
+flask-socketio
+python-socketio
+simple-websocket
+eventlet
+gunicorn
+
+# Optional: Web Server Alternatives
+gevent
+gevent-websocket
+
+# Optional: Frontend screenshot tool (Tools/capture_frontend_view.py)
+playwright
+
+# Optional: Frontend GIF tool (Tools/capture_frontend_gif.py)
+pillow

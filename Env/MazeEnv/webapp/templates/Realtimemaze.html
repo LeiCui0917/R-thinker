@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Realtime Maze App</title>
+<!-- Web Icon (Consistent with ChessEnv structure) -->
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icons8-location-static.png') }}">
+
+<!-- ======================== External Dependencies ======================== -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+<!-- Import Maze CSS (Consistent layout and visual system with ChessEnv) -->
+<link rel="stylesheet" href="{{ url_for('static', filename='RealtimeMaze.css') }}">
+</head>
+
+<body>
+<div class="container">
+  <!-- Title -->
+  <h1>Realtime Maze App</h1>
+  
+  <!-- Model Selection Section -->
+  <div class="model-section">
+    <h2 class="model-section-title">Model Selection</h2>
+    <div class="model-selectors">
+      
+      <!-- Red Agent Selector -->
+      <div class="agent-selector">
+        <div class="agent-header">
+          <div class="agent-color-indicator red-indicator"></div>
+          <h3 class="agent-title">Red</h3>
+        </div>
+        <div class="agent-type-selector">
+          <label class="agent-label" for="redAgentGroup">Agent Group</label>
+          <select id="redAgentGroup" class="agent-type-select">
+            <option value="">Loading...</option>
+          </select>
+
+          <div id="redModelSelector" class="llm-selector">
+            <label class="llm-label" for="redAgentModel">Agent</label>
+            <select id="redAgentModel" class="llm-model-select">
+              <option value="">Loading...</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blue Agent Selector -->
+      <div class="agent-selector">
+        <div class="agent-header">
+          <div class="agent-color-indicator blue-indicator"></div>
+          <h3 class="agent-title">Blue</h3>
+        </div>
+        <div class="agent-type-selector">
+          <label class="agent-label" for="blueAgentGroup">Agent Group</label>
+          <select id="blueAgentGroup" class="agent-type-select">
+            <option value="">Loading...</option>
+          </select>
+
+          <div id="blueModelSelector" class="llm-selector">
+            <label class="llm-label" for="blueAgentModel">Agent</label>
+            <select id="blueAgentModel" class="llm-model-select">
+              <option value="">Loading...</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <!-- Start Button Section -->
+  <div class="button-section">
+    <button id="startBtn" class="primary-button">Start Run</button>
+  </div>
+  
+  <!-- Maze Rendering Section -->
+  <div class="board-section">
+    <div class="board-container">
+      <canvas id="mazeCanvas"></canvas>
+      <pre id="maze" class="maze-ascii"></pre>
+    </div>
+  </div>
+  
+  <!-- Status Display and Control Buttons Section -->
+  <div class="status-section">
+    <div id="status">Waiting to start...</div>
+    <div class="control-buttons">
+      <button id="pauseBtn" class="secondary-button">Pause Game</button>
+      <button id="endBtn" class="secondary-button">End Game</button>
+    </div>
+  </div>
+</div>
+
+<script>
+window.MAZE_ASSETS = {
+  goalIcon: "{{ url_for('static', filename='img/icons8-location-static.png') }}"
+};
+</script>
+
+<!-- Import Maze Frontend Script -->
+<script src="{{ url_for('static', filename='RealtimeMaze.js') }}"></script>
+</body>
+</html>

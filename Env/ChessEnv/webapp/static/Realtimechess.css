@@ -1,0 +1,426 @@
+/* ======================== Global Variable Definitions ======================== */
+/* 
+ * CSS custom property definitions, used to manage the visual style of the entire application uniformly
+ * Use :root pseudo-class to ensure variables are available throughout the document
+ */
+:root {
+  /* Primary color - used for main buttons, headings, and important elements */
+  --primary-color: #667eea;
+  /* Secondary color - used for gradients and secondary elements */
+  --secondary-color: #764ba2;
+  /* Success/Confirmation color - used for green related elements */
+  --accent-green: #28a745;
+  /* Warning/Error color - used for red related elements */
+  --accent-red: #dc3545;
+  /* Light gray background - used for card and area backgrounds */
+  --gray-light: #f8f9fa;
+  /* Border color - used for all border elements */
+  --gray-border: #e9ecef;
+  /* Main text color - used for headings and body text */
+  --text-dark: #2c3e50;
+  
+  /* Border radius definitions */
+  --radius-lg: 20px;  /* Large radius - used for containers */
+  --radius-md: 12px;  /* Medium radius - used for cards and buttons */
+  --radius-sm: 8px;   /* Small radius - used for input fields and small elements */
+  
+  /* Shadow effect definitions */
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.08);  /* Small shadow - used for card hover */
+  --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.1);   /* Medium shadow - used for main cards */
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15); /* Large shadow - used for containers */
+  
+  /* Transition animation time */
+  --transition-fast: 0.2s ease;   /* Fast transition - used for hover effects */
+  --transition-normal: 0.3s ease;  /* Normal transition - used for main animations */
+}
+
+/* ======================== Global Style Reset ======================== */
+/* 
+ * Reset browser default styles to ensure cross-browser consistency
+ * Use border-box box model to simplify size calculations
+ */
+* {
+  box-sizing: border-box;  /* Include border and padding in element width */
+  margin: 0;               /* Clear default margin */
+  padding: 0;              /* Clear default padding */
+}
+
+/* 
+ * Page body style
+ * Set overall layout and background effects
+ */
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;  /* Font stack, ensure cross-platform compatibility */
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));  /* Gradient background */
+  display: flex;                    /* Use flex layout */
+  flex-direction: column;           /* Arrange vertically */
+  align-items: center;              /* Center horizontally */
+  padding: 30px 20px;               /* Padding */
+  color: var(--text-dark);          /* Text color */
+  line-height: 1.6;                 /* Line height, improve readability */
+  min-height: 100vh;                /* Minimum height is viewport height */
+}
+
+/* ======================== Container and Layout ======================== */
+/* 
+ * Main container style
+ * Use CSS Grid layout system, define overall page structure
+ */
+.container {
+  background: rgba(255, 255, 255, 0.95);  /* Semi-transparent white background */
+  border-radius: var(--radius-lg);        /* Large border radius */
+  box-shadow: var(--shadow-lg);           /* Large shadow effect */
+  padding: 40px;                          /* Padding */
+  max-width: 900px;                       /* Maximum width limit */
+  width: 100%;                            /* Width 100% */
+  backdrop-filter: blur(10px);            /* Background blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2);  /* Semi-transparent border */
+  
+  /* CSS Grid layout definition */
+  display: grid;                          /* Enable grid layout */
+  gap: 30px;                              /* Grid gap */
+  grid-template-columns: 1fr 1fr;         /* Two columns equal width layout */
+  grid-template-areas:                    /* Define grid area names */
+    "header header"                       /* Header occupies two columns */
+    "agents agents"                       /* Agent selection area occupies two columns */
+    "start-button start-button"           /* Start button occupies two columns */
+    "board controls";                     /* Board and status control area */
+  
+  animation: fadeIn 0.6s ease-out;        /* Fade in animation effect */
+}
+
+/* ======================== Header ======================== */
+/* 
+ * Main header style
+ * Use CSS gradient text effect to enhance visual appeal
+ */
+h1 {
+  grid-area: header;                      /* Specify grid area */
+  text-align: center;                      /* Center text */
+  color: var(--text-dark);                 /* Text color */
+  font-size: 2.8rem;                       /* Font size */
+  font-weight: 700;                        /* Font weight */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Text shadow */
+  
+  /* Gradient text effect */
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;           /* Webkit browser text clip */
+  background-clip: text;                   /* Standard text clip */
+  -webkit-text-fill-color: transparent;    /* Webkit text transparent */
+}
+
+/* ======================== Model Selection ======================== */
+/* 
+ * Model selection area style
+ * Contains white and black agent selectors
+ */
+.model-section {
+  grid-area: agents;                       /* Specify grid area */
+  background: var(--gray-light);           /* Light gray background */
+  border-radius: var(--radius-md);         /* Medium border radius */
+  padding: 25px;                           /* Padding */
+  box-shadow: var(--shadow-md);            /* Medium shadow */
+  border: 1px solid var(--gray-border);    /* Border */
+}
+
+/* Model selection area title */
+.model-section-title {
+  font-size: 1.4rem;                       /* Font size */
+  font-weight: 600;                        /* Font weight */
+  text-align: center;                       /* Center text */
+  margin-bottom: 25px;                      /* Bottom margin */
+  border-bottom: 2px solid var(--gray-border);  /* Bottom border */
+  padding-bottom: 15px;                     /* Bottom padding */
+}
+
+/* Model selector container - use flex layout to arrange white and black selectors */
+.model-selectors {
+  display: flex;                           /* Enable flex layout */
+  gap: 25px;                               /* Element gap */
+  justify-content: space-between;          /* Justify content between */
+}
+
+/* ======================== Agent Selector ======================== */
+/* 
+ * Single agent selector card style
+ * Contains agent type selection, model selection, etc.
+ */
+.agent-selector {
+  flex: 1;                                 /* Equal distribution of remaining space */
+  background: white;                       /* White background */
+  border-radius: var(--radius-md);         /* Medium border radius */
+  padding: 25px;                           /* Padding */
+  box-shadow: var(--shadow-sm);            /* Small shadow */
+  border: 1px solid var(--gray-border);    /* Border */
+  transition: all var(--transition-normal); /* Transition animation */
+  display: flex;                           /* Enable flex layout */
+  flex-direction: column;                  /* Arrange vertically */
+}
+
+/* Agent selector hover effect */
+.agent-selector:hover {
+  transform: translateY(-3px);             /* Move up 3 pixels */
+  box-shadow: var(--shadow-md);            /* Enhance shadow effect */
+}
+
+/* White agent selector left border color */
+.agent-selector:first-child { 
+  border-left: 4px solid var(--primary-color);  /* Primary color border */
+}
+
+/* Black agent selector left border color */
+.agent-selector:last-child  { 
+  border-left: 4px solid var(--accent-red);     /* Red border */
+}
+
+/* Agent selector header style */
+.agent-header {
+  display: flex;                           /* Enable flex layout */
+  align-items: center;                     /* Center vertically */
+  margin-bottom: 20px;                     /* Bottom margin */
+  border-bottom: 1px solid var(--gray-border);  /* Bottom border */
+  padding-bottom: 15px;                    /* Bottom padding */
+}
+
+/* Piece color indicator base style */
+.agent-color-indicator {
+  width: 16px;                             /* Width */
+  height: 16px;                            /* Height */
+  border-radius: 50%;                      /* Circular */
+  margin-right: 12px;                      /* Right margin */
+}
+
+/* White piece color indicator */
+.white-indicator {
+  background: linear-gradient(135deg, #f8f9fa, #adb5bd);  /* White gradient */
+  border: 2px solid #495057;               /* Dark gray border */
+}
+
+/* Black piece color indicator */
+.black-indicator {
+  background: linear-gradient(135deg, #495057, #212529);  /* Black gradient */
+  border: 2px solid #f8f9fa;               /* Light border */
+}
+
+/* ======================== Dropdown Unified Style ======================== */
+/* 
+ * Unified style for all dropdown select boxes
+ * Ensure consistent appearance for all selectors
+ */
+select {
+  width: 100%;                             /* Width 100% */
+  padding: 12px 15px;                      /* Padding */
+  border-radius: var(--radius-sm);         /* Small border radius */
+  border: 2px solid var(--gray-border);    /* Border */
+  font-size: 1rem;                         /* Font size */
+  background: white;                       /* White background */
+  transition: border-color var(--transition-fast);  /* Border color transition */
+  outline: none;                           /* Clear default outline */
+}
+
+/* Style when dropdown is focused */
+select:focus {
+  border-color: var(--primary-color);      /* Primary color border */
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);  /* Focus shadow effect */
+}
+
+/* ======================== Secondary Selector ======================== */
+/* 
+ * LLM model selector and thinking time selector style
+ * Dynamically displayed when corresponding agent type is selected
+ */
+.llm-selector {
+  margin-top: 20px;                        /* Top margin */
+  padding: 18px;                           /* Padding */
+  background: var(--gray-light);           /* Light gray background */
+  border-radius: var(--radius-sm);         /* Small border radius */
+  border-left: 4px solid var(--accent-green);  /* Green left border */
+  animation: fadeIn 0.3s ease-out;         /* Fade in animation */
+}
+
+/* ======================== Buttons ======================== */
+/* 
+ * Button base style
+ * Define common properties for primary and secondary buttons
+ */
+.primary-button, .secondary-button {
+  padding: 16px 25px;                      /* Padding */
+  color: white;                            /* White text */
+  border: none;                            /* No border */
+  border-radius: var(--radius-md);         /* Medium border radius */
+  font-size: 1.1rem;                       /* Font size */
+  font-weight: 600;                        /* Font weight */
+  cursor: pointer;                         /* Pointer cursor */
+  transition: all var(--transition-normal); /* Transition animation */
+  box-shadow: var(--shadow-sm);            /* Small shadow */
+}
+
+/* Primary button style - used for main actions like starting game */
+.primary-button {
+  width: 100%;                             /* Width 100% */
+  font-size: 1.3rem;                       /* Larger font */
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));  /* Gradient background */
+}
+
+/* Primary button hover effect */
+.primary-button:hover {
+  transform: translateY(-3px);             /* Move up */
+  box-shadow: var(--shadow-md);            /* Enhance shadow */
+}
+
+/* Secondary button style - used for pause, end, etc. */
+.secondary-button {
+  background: #6c757d;                     /* Gray background */
+}
+
+/* Pause button special style */
+#pauseBtn {
+  background: linear-gradient(135deg, var(--accent-green), #20c997);  /* Green gradient */
+}
+
+/* End button special style */
+#endBtn {
+  background: linear-gradient(135deg, var(--accent-red), #e83e8c);  /* Red gradient */
+}
+
+/* Start button area container */
+.button-section {
+  grid-area: start-button;                 /* Specify grid area */
+  display: flex;                           /* Enable flex layout */
+  justify-content: center;                 /* Center horizontally */
+  width: 100%;                             /* Width 100% */
+}
+
+/* Control button container */
+.control-buttons {
+  display: flex;                           /* Enable flex layout */
+  flex-direction: column;                  /* Arrange vertically */
+  gap: 15px;                               /* Button gap */
+  width: 100%;                             /* Width 100% */
+}
+
+/* ======================== Board and Status ======================== */
+/* 
+ * Board area and status display style
+ */
+.board-section {
+  grid-area: board;                        /* Specify grid area */
+  display: flex;                           /* Enable flex layout */
+  justify-content: center;                 /* Center horizontally */
+}
+
+/* Board container style */
+.board-container {
+  background: white;                       /* White background */
+  border-radius: var(--radius-md);         /* Medium border radius */
+  padding: 20px;                           /* Padding */
+  box-shadow: var(--shadow-md);            /* Medium shadow */
+  border: 1px solid var(--gray-border);    /* Border */
+}
+
+/* Board element style */
+#board {
+  width: 400px;                           /* Fixed width */
+  height: 400px;                          /* Fixed height */
+  border-radius: var(--radius-sm);        /* Small border radius */
+  box-shadow: var(--shadow-sm);           /* Small shadow */
+}
+
+/* Status display area */
+.status-section {
+  grid-area: controls;                     /* Specify grid area */
+  display: flex;                           /* Enable flex layout */
+  flex-direction: column;                  /* Arrange vertically */
+  gap: 20px;                               /* Element gap */
+}
+
+/* Status text display style */
+#status {
+  font-size: 1.1rem;                       /* Font size */
+  padding: 20px;                           /* Padding */
+  background: var(--gray-light);           /* Light gray background */
+  border-radius: var(--radius-md);         /* Medium border radius */
+  border-left: 4px solid var(--primary-color);  /* Left primary color border */
+  text-align: center;                      /* Center text */
+  box-shadow: var(--shadow-sm);            /* Small shadow */
+  min-height: 80px;                        /* Minimum height */
+  display: flex;                           /* Enable flex layout */
+  align-items: center;                     /* Center vertically */
+  justify-content: center;                 /* Center horizontally */
+}
+
+/* ======================== Animation and Responsive ======================== */
+/* 
+ * Animation definition and responsive layout adjustment
+ */
+
+/* Fade in animation keyframes */
+@keyframes fadeIn {
+  from { 
+    opacity: 0;                           /* Start opacity 0 */
+    transform: translateY(20px);          /* Offset down 20 pixels */
+  }
+  to   { 
+    opacity: 1;                           /* End opacity 1 */
+    transform: translateY(0);             /* Return to original position */
+  }
+}
+
+/* Tablet device responsive style (max width 768px) */
+@media (max-width: 768px) {
+  .container {
+    /* Adjust to single column layout */
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header" "agents" "start-button" "board" "controls";
+    gap: 20px;                             /* Reduce gap */
+    padding: 25px;                         /* Reduce padding */
+  }
+
+  /* Model selectors change to vertical arrangement */
+  .model-selectors { 
+    flex-direction: column;                /* Vertical direction */
+    gap: 20px;                             /* Gap */
+  }
+  
+  /* Adjust board size */
+  #board { 
+    width: 340px; height: 340px;           /* Reduce size */
+  }
+  
+  /* Control buttons change to horizontal arrangement */
+  .control-buttons { 
+    flex-direction: row;                   /* Horizontal direction */
+  }
+}
+
+/* Mobile device responsive style (max width 480px) */
+@media (max-width: 480px) {
+  /* Further reduce board size */
+  #board { 
+    width: 300px; height: 300px;           /* Minimum size */
+  }
+  
+  /* Reduce header font size */
+  h1 { 
+    font-size: 1.8rem;                     /* Smaller font */
+  }
+}
+
+/* ======================== Cooldown Overlay ======================== */
+/* 
+ * Piece cooldown effect overlay style
+ * Used to display cooldown status after piece movement
+ */
+.cooldown-overlay {
+  position: absolute;                       /* Absolute positioning */
+  pointer-events: none;                     /* Disable mouse events */
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.55), rgba(118, 75, 162, 0.55));  /* Semi-transparent gradient */
+  backdrop-filter: blur(2px);              /* Background blur */
+  top: 0; left: 0;                         /* Cover entire parent element */
+  width: 100%; height: 100%;               /* Width height 100% */
+  transition: opacity 0.2s ease;           /* Opacity transition */
+  border-radius: var(--radius-sm);         /* Small border radius */
+  z-index: 10;                             /* Higher z-index */
+  opacity: 0.8;                            /* Semi-transparent */
+}

@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "description": "Legacy R-thinker configuration template restored from the April 2026 snapshot.",
+  "api_settings": {
+    "api_key": "replace_me",
+    "base_url": "https://example.com/v1/chat/completions",
+    "timeout": 120,
+    "max_retries": 2
+  },
+  "llm_settings": {
+    "temperature": 0.6,
+    "num_lookahead_tokens": 5000,
+    "max_tokens": 100,
+    "default_model": "replace_me"
+  },
+  "llm_available_models": {
+    "example_model": "replace_me"
+  },
+  "game_settings": {
+    "chess_cooldown": 8.0,
+    "chess_ai_min_interval": 10.0,
+    "maze_step_duration": 0.5,
+    "maze_trail_release_seconds": 15.0,
+    "maze_ai_min_interval": 10.0,
+    "maze_logical_size": 15,
+    "maze_loop_probability": 0.1
+  },
+  "agent_types": {
+    "random": "Random_Agent",
+    "rule": "Rule_Agent",
+    "llm": "LLM_Agent",
+    "think": "Think_Agent",
+    "human": "Human_Agent"
+  },
+  "web_defaults": {
+    "chess": {
+      "white": {
+        "group": "llm_base"
+      },
+      "black": {
+        "group": "rule"
+      }
+    },
+    "maze": {
+      "red": {
+        "group": "llm_base"
+      },
+      "blue": {
+        "group": "rule"
+      }
+    }
+  }
+}

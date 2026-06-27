@@ -1,0 +1,37 @@
+{
+  "agent_llm_instances": {
+    "Think_Agent": "gpt-oss-120b",
+    "FastOnly_Agent": "gpt-oss-120b",
+    "SlowOnly_Agent": "gpt-oss-120b",
+    "Think_WithoutOpponent_Agent": "gpt-oss-120b",
+    "Think_WithoutSelf_Agent": "gpt-oss-120b",
+    "LLM_Agent": "gpt-oss-120b",
+    "CoT_Agent": "gpt-oss-120b",
+    "MemoryLLM_Agent": "gpt-oss-120b",
+    "CodingPairs_Agent": "gpt-oss-120b",
+    "Reflexion_Agent": {
+      "decision": "gpt-oss-120b",
+      "reflection": "gpt-oss-120b"
+    }
+  },
+  "agent_delay_defaults": {
+    "maze": {
+      "Random_Agent": 0.0,
+      "Rule_Agent": 0.0
+    },
+    "chess": {
+      "Random_Agent": 0.0,
+      "Rule_Agent": 3.0
+    }
+  },
+  "think_similarity_weights": {
+    "maze": {
+      "w_self": 0.6,
+      "w_opp_far": 0.4
+    },
+    "chess": {
+      "w_self": 0.6,
+      "w_opp_far": 0.4
+    }
+  }
+}

@@ -21,6 +21,8 @@ dist/
 
 # Local credentials
 .env
+config.json
+config.local.json
 
 # Local editor and agent state
 .vscode/

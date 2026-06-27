@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive Chess App</title>
+<!-- Web Icon -->
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/chesspieces/wikipedia/wK.png') }}">
+
+<!-- ======================== External Dependencies ======================== -->
+<!-- jQuery, for DOM manipulation and Ajax -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<!-- Chessboard (chessboard.js) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.js"></script>
+<!-- SocketIO Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='Realtimechess.css') }}">
+</head>
+
+<body>
+<div class="container">
+  <!-- Title -->
+  <h1>Interactive Chess App</h1>
+  
+  <!-- Model Selection Section -->
+  <div class="model-section">
+    <h2 class="model-section-title">Model Selection</h2>
+    <div class="model-selectors">
+      <!-- White Agent Selector -->
+      <div class="agent-selector">
+        <div class="agent-header">
+          <div class="agent-color-indicator white-indicator"></div>
+          <h3 class="agent-title">White Agent</h3>
+        </div>
+        
+        <div class="agent-type-selector">
+          <label class="agent-label" for="whiteAgentGroup">Agent Group</label>
+          <select id="whiteAgentGroup" class="agent-type-select">
+            <!-- Remove hardcoded options, load dynamically -->
+            <option value="">Loading...</option>
+          </select>
+        </div>
+        
+        <div id="whiteModelSelector" class="llm-selector">
+          <label class="llm-label" for="whiteAgentModel">Agent</label>
+          <select id="whiteAgentModel" class="llm-model-select">
+            <option value="">Please select...</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Black Agent Selector -->
+      <div class="agent-selector">
+        <div class="agent-header">
+          <div class="agent-color-indicator black-indicator"></div>
+          <h3 class="agent-title">Black Agent</h3>
+        </div>
+        
+        <div class="agent-type-selector">
+          <label class="agent-label" for="blackAgentGroup">Agent Group</label>
+          <select id="blackAgentGroup" class="agent-type-select">
+            <!-- Remove hardcoded options, load dynamically -->
+            <option value="">Loading...</option>
+          </select>
+        </div>
+        
+        <div id="blackModelSelector" class="llm-selector">
+          <label class="llm-label" for="blackAgentModel">Agent</label>
+          <select id="blackAgentModel" class="llm-model-select">
+            <option value="">Please select...</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Start Button Section -->
+  <div class="button-section">
+    <button id="startBtn" class="primary-button">Start Game</button>
+  </div>
+  
+  <!-- Board Section -->
+  <div class="board-section">
+    <div class="board-container">
+      <div id="board"></div>
+    </div>
+  </div>
+  
+  <!-- Status Display and Control Buttons Section -->
+  <div class="status-section">
+    <div id="status">Waiting to start...</div>
+    <div class="control-buttons">
+      <button id="pauseBtn" class="secondary-button">Pause Game</button>
+      <button id="endBtn" class="secondary-button">End Game</button>
+    </div>
+  </div>
+</div>
+
+<!-- Import custom JavaScript script -->
+<script src="{{ url_for('static', filename='Realtimechess.js') }}"></script>
+</body>
+</html>
